@@ -37,10 +37,10 @@ class MainActivity : AppCompatActivity() {
     private fun getCharacterRoot(){
         //Crear la corutina
         CoroutineScope(Dispatchers.IO).launch {
-            val response = call.getCharacters(1)
+            val response = call.getCharacters(2)
             runOnUiThread{
                 if(response.isSuccessful){
-                    binding.helloTv.text = response.body()?.results?.get(0)?.toString() ?: "x"
+                    binding.rvCharacters.adapter = CharachtersAdapter(response.body()!!.results)
                 } else {
                     showError()
                 }
